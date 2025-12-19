@@ -11,15 +11,20 @@ pipeline {
             }
         }
 
+        stage("unittest") {
+            steps {
+                sh "yarn test"
+            }
+        }
+
         stage('build') {
             steps {
                 sh 'yarn build'
             }
         }
 
-        stage("test") {
+        stage("integrationtest") {
             steps {
-                sh "yarn test"
                 sh "yarn test:e2e"
             }
         }
