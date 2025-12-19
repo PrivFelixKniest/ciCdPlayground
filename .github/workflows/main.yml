@@ -13,9 +13,11 @@ on:
 permissions:
   checks: write
   pull-requests: write
+  repository-projects: write
   id-token: write
   contents: read
   pages: write
+  
 
 jobs:
   build:
