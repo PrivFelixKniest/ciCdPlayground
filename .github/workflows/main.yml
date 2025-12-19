@@ -13,7 +13,6 @@ on:
 permissions:
   checks: write
   pull-requests: write
-  repository-projects: write
   id-token: write
   contents: read
   pages: write
@@ -50,3 +49,5 @@ jobs:
         git config --local user.name "GitHub Action"
         git tag -a "${{ inputs.version }}" -m "Add new tag v${{ inputs.version }}"
         git push origin --tags
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
