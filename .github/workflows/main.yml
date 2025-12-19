@@ -47,4 +47,4 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git tag -a "${{ inputs.version }}" -m "Add new tag v${{ inputs.version }}"
-        git push origin "${{ github.run_number }}"
+        git push origin --tags
