@@ -4,6 +4,11 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version Tag'
+        required: true
+        type: string
   
 permissions:
   checks: write
@@ -34,3 +39,12 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action@v2.22.0
       with:
         files: "**/reports/**/*.xml"
+    - if: ${{ inputs.version != '' }}
+      uses: actions/checkout@v2
+    - if: ${{ inputs.version != '' }}
+      name: Create Tag
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git tag -a "${{ inputs.version }}" -m "Add new tag v${{ inputs.version }}"
+        git push origin "v${{ github.run_number }}"
